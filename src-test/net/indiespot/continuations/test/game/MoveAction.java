@@ -59,8 +59,8 @@ public class MoveAction implements Action {
 	@Override
 	public boolean perform() {
 		float ratio = EasyMath.invLerpWithCap(Game.TIME, departAt, arriveAt);
-		pos.x = EasyMath.lerp(ratio, src.x, dst.x);
-		pos.y = EasyMath.lerp(ratio, src.y, dst.y);
+		pos.x = EasyMath.lerp(src.x, dst.x, ratio);
+		pos.y = EasyMath.lerp(src.y, dst.y, ratio);
 		return Game.TIME <= arriveAt;
 	}
 
