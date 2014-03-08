@@ -50,7 +50,7 @@ LibContinuations is written on top of Matthias Mann's [Continuations Library](ht
 There are two ways to apply the bytecode rewriting:
 
 * At runtime: A Java agent intercepts classloading and adjusts each class as it is loaded. This is convenient while developing.
-* Ahead of time: Java code or an Ant task discovesr your class files and rewrites them. This is convenient to do before deploying your application.
+* Ahead of time: Java code or an Ant task discovers your class files and rewrites them. This is convenient to do before deploying your application.
 
 With either option you still have full debugging functionality in your IDE: step into/over/out and breakpoints work as always.
 
