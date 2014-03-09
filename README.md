@@ -56,7 +56,7 @@ With either option you still have full debugging functionality in your IDE: step
 
 ## Using LibContinuations
 
-`VirtualProcessor` manages all green threads for a single native thread. `VirtualThread` takes a `VirtualRunnable` and behaves just like `java.lang.Thread` and `java.lang.Runnable`.
+`VirtualProcessor` manages all green threads for a single native thread. `VirtualThread` takes a `VirtualRunnable` and behaves just like `java.lang.Thread` and `java.lang.Runnable`. Methods that can be suspended via `VirtualThread.sleep()` or `VirtualThread.yield()` must throw `SuspendExecution`.
 
 
 ```java
