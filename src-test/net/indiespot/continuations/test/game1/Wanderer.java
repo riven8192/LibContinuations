@@ -32,9 +32,8 @@
 
 package net.indiespot.continuations.test.game1;
 
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Misc;
-import craterstudio.math.Vec2;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class Wanderer extends Human {

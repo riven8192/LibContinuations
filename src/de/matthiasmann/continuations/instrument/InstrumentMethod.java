@@ -54,6 +54,7 @@ import org.objectweb.asm.tree.analysis.Value;
  * 
  * @author Matthias Mann
  */
+@SuppressWarnings("all")
 public class InstrumentMethod {
 
     private static final String STACK_NAME = Type.getInternalName(Stack.class);

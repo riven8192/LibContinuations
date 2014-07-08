@@ -60,6 +60,7 @@ public class VirtualThreadTestBoundedBuffer {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		final VirtualProcessor processor = new VirtualProcessor();
 

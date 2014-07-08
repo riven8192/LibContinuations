@@ -1,6 +1,6 @@
 package net.indiespot.continuations.util;
 
-import craterstudio.data.CircularArrayList;
+import net.indiespot.dependencies.CircularArrayList;
 import de.matthiasmann.continuations.SuspendExecution;
 
 public class VirtualMessageQueue {

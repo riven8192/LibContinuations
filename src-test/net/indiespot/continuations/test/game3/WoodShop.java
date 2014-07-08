@@ -37,7 +37,6 @@ import static net.indiespot.continuations.test.game.ResourceType.*;
 import java.awt.*;
 
 import net.indiespot.continuations.*;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.ResourceConversion;
 import net.indiespot.continuations.test.game.ResourceHolder;
@@ -45,6 +44,7 @@ import de.matthiasmann.continuations.*;
 
 public class WoodShop extends GameItem {
 
+	@SuppressWarnings("serial")
 	public WoodShop() {
 		this.name = "woodshop";
 		this.color = Color.ORANGE;

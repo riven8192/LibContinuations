@@ -37,12 +37,14 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 
+@SuppressWarnings("serial")
 public class VirtualThreadLocal<T> implements Serializable {
 
 	protected T initialValue() {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public final void set(T value) {
 		this.locals().put(this, value == null ? (T) NULL_VALUE : value);
 	}
@@ -62,6 +64,7 @@ public class VirtualThreadLocal<T> implements Serializable {
 		return got;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Map<VirtualThreadLocal<T>, T> locals() {
 		VirtualThread self = VirtualThread.currentThread();
 		if (self.locals == null) {

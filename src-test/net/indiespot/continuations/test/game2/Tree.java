@@ -37,16 +37,15 @@ import static net.indiespot.continuations.test.game.ResourceType.*;
 import java.awt.*;
 
 import net.indiespot.continuations.*;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceHolder;
-
 import de.matthiasmann.continuations.*;
 
 public class Tree extends GameItem {
 
+	@SuppressWarnings("serial")
 	public Tree() {
 		this.name = null;
 		this.color = Color.GREEN;

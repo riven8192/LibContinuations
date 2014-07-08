@@ -34,7 +34,7 @@ package net.indiespot.continuations.test.game;
 
 import java.util.*;
 
-import craterstudio.data.IntList;
+import net.indiespot.dependencies.IntList;
 
 public class ResourceConversion {
 	private final List<ResourceType> consumeTypes = new ArrayList<>();

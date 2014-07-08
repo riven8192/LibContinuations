@@ -6,6 +6,7 @@ import net.indiespot.continuations.util.VirtualExchanger;
 
 public class VirtualThreadTestExchanger {
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		final VirtualProcessor processor = new VirtualProcessor();
 

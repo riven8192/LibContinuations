@@ -39,6 +39,7 @@ import de.matthiasmann.continuations.SuspendExecution;
 
 public class ContinuationsTestCoIterator {
 
+	@SuppressWarnings("serial")
 	static class YieldReturn extends CoIterator<String> {
 		@Override
 		protected void run() throws SuspendExecution {

@@ -37,6 +37,7 @@ import net.indiespot.continuations.util.VirtualMessage;
 import de.matthiasmann.continuations.SuspendExecution;
 
 public class VirtualThreadTestMessages {
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		final VirtualProcessor processor = new VirtualProcessor();
 

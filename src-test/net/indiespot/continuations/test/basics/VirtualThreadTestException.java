@@ -41,6 +41,7 @@ public class VirtualThreadTestException {
 	public static void main(String[] args) {
 		VirtualProcessor proc = new VirtualProcessor();
 
+		@SuppressWarnings("serial")
 		VirtualRunnable task = new VirtualRunnable() {
 			@Override
 			public void run() throws SuspendExecution {

@@ -20,6 +20,7 @@ class VirtualThreadQueue extends AbstractQueue<VirtualThread> {
 	private long headTime;
 	private int size;
 
+	@SuppressWarnings("unchecked")
 	public VirtualThreadQueue(VirtualProcessor proc, long bucketDuration) {
 		if (bucketDuration <= 0) {
 			throw new IllegalArgumentException();
@@ -40,6 +41,7 @@ class VirtualThreadQueue extends AbstractQueue<VirtualThread> {
 		tailNext = new ArrayList<>();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void addBuckets() {
 		ArrayList<VirtualThread>[] curr = buckets;
 		ArrayList<VirtualThread>[] next = new ArrayList[curr.length << 1];

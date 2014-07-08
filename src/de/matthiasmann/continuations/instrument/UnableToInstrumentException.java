@@ -37,6 +37,7 @@ package de.matthiasmann.continuations.instrument;
  * 
  * @author Matthias Mann
  */
+@SuppressWarnings("serial")
 public class UnableToInstrumentException extends RuntimeException {
 
     private final String reason;

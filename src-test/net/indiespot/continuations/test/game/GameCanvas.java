@@ -40,6 +40,7 @@ import javax.swing.*;
 import net.indiespot.continuations.test.game1.*;
 
 
+@SuppressWarnings("serial")
 public class GameCanvas extends JPanel {
 
 	boolean renderLabelsForHumans = false;

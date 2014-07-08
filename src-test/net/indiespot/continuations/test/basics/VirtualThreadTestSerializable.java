@@ -5,6 +5,7 @@ import net.indiespot.continuations.*;
 
 public class VirtualThreadTestSerializable {
 
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		final VirtualProcessor processor = new VirtualProcessor();
 

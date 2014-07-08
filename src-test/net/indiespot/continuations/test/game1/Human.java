@@ -36,21 +36,19 @@ import static net.indiespot.continuations.test.game.ResourceType.*;
 
 import java.awt.*;
 
-import craterstudio.func.Filter;
-import craterstudio.math.Vec2;
-
 import net.indiespot.continuations.VirtualRunnable;
 import net.indiespot.continuations.VirtualThread;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceHolder;
-
+import net.indiespot.dependencies.Filter;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public abstract class Human extends GameItem {
 
+	@SuppressWarnings("serial")
 	public Human() {
 		this.name = "human";
 		this.color = Color.DARK_GRAY;

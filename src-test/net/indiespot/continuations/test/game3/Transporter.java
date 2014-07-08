@@ -37,16 +37,14 @@ import static net.indiespot.continuations.test.game.ResourceType.*;
 import java.awt.*;
 import java.util.List;
 
-import craterstudio.math.Vec2;
-
 import net.indiespot.continuations.*;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceHolder;
 import net.indiespot.continuations.test.game.ResourceType;
 import net.indiespot.continuations.test.game1.*;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class Transporter extends Human {

@@ -33,16 +33,14 @@
 package net.indiespot.continuations.test.game2;
 
 import static net.indiespot.continuations.test.game.ResourceType.*;
-import craterstudio.math.Vec2;
 import net.indiespot.continuations.VirtualThread;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceConversion;
 import net.indiespot.continuations.test.game.ResourceHolder;
 import net.indiespot.continuations.test.game1.*;
-
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class Lumberjack extends Human {

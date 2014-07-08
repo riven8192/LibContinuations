@@ -35,11 +35,10 @@ package net.indiespot.continuations.util;
 import java.io.Serializable;
 
 import net.indiespot.continuations.VirtualThread;
-
-import craterstudio.data.CircularArrayList;
-
+import net.indiespot.dependencies.CircularArrayList;
 import de.matthiasmann.continuations.*;
 
+@SuppressWarnings("serial")
 public class VirtualExchanger<T> implements Serializable {
 	private final VirtualCondition queueNotEmpty;
 	private final CircularArrayList<Slot<T>> queue;
@@ -55,12 +54,12 @@ public class VirtualExchanger<T> implements Serializable {
 		queue.addLast(new Slot<T>(item));
 		queueNotEmpty.signalAll();
 
-		for (;;) {
+		for(;;) {
 			while (queue.isEmpty()) {
 				queueNotEmpty.await();
 			}
 
-			if (queue.peekFirst().producer != self) {
+			if(queue.peekFirst().producer != self) {
 				return queue.pollFirst().value;
 			}
 

@@ -38,12 +38,10 @@ import java.util.List;
 
 import javax.swing.*;
 
-
-import craterstudio.func.Filter;
-import craterstudio.math.Vec2;
-
 import net.indiespot.continuations.VirtualProcessor;
 import net.indiespot.continuations.test.game1.Human;
+import net.indiespot.dependencies.Filter;
+import net.indiespot.dependencies.Vec2;
 
 
 

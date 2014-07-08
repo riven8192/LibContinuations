@@ -35,9 +35,9 @@ package net.indiespot.continuations.util;
 import java.io.Serializable;
 
 import net.indiespot.continuations.VirtualThread;
-
 import de.matthiasmann.continuations.SuspendExecution;
 
+@SuppressWarnings("serial")
 public class VirtualLock implements Serializable {
 
 	private final VirtualCondition unlockedCondition;

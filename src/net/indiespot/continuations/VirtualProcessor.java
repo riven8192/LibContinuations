@@ -39,8 +39,9 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import craterstudio.data.CircularArrayList;
+import net.indiespot.dependencies.CircularArrayList;
 
+@SuppressWarnings("serial")
 public class VirtualProcessor implements Serializable {
 
 	static final ThreadLocal<VirtualProcessor> LAST_DEFINED = new ThreadLocal<VirtualProcessor>();
@@ -56,9 +57,10 @@ public class VirtualProcessor implements Serializable {
 	public VirtualProcessor(int queueBucketSlotDuration) {
 		this.nativeThread = Thread.currentThread();
 
-		if (queueBucketSlotDuration > 0) {
+		if(queueBucketSlotDuration > 0) {
 			this.scheduledThreadsQueue = new VirtualThreadQueue(this, queueBucketSlotDuration);
-		} else {
+		}
+		else {
 			this.scheduledThreadsQueue = new PriorityQueue<VirtualThread>(11, new VirtualThreadComparator());
 		}
 		this.doScheduleNextTick = new ArrayList<VirtualThread>();
@@ -74,7 +76,7 @@ public class VirtualProcessor implements Serializable {
 	private final Thread nativeThread;
 
 	void verifyCurrentThread() {
-		if (nativeThread != Thread.currentThread()) {
+		if(nativeThread != Thread.currentThread()) {
 			throw new IllegalThreadStateException();
 		}
 	}
@@ -119,12 +121,13 @@ public class VirtualProcessor implements Serializable {
 		while (true) {
 			// do we have any virtual threads that didn't require scheduling?
 			VirtualThread thread;
-			if (--execNowCountdown >= 0) {
+			if(--execNowCountdown >= 0) {
 				thread = this.doExecuteNextTick.removeFirst();
-			} else {
+			}
+			else {
 				// can we execute the next scheduled thread already?
 				thread = this.scheduledThreadsQueue.peek();
-				if (thread == null || thread.wakeUpAt > now) {
+				if(thread == null || thread.wakeUpAt > now) {
 					break;
 				}
 
@@ -138,27 +141,32 @@ public class VirtualProcessor implements Serializable {
 			VirtualThreadState state;
 			try {
 				state = thread.step();
-			} catch (Throwable uncaught) {
+			}
+			catch (Throwable uncaught) {
 				Throwable t = uncaught;
 				do {
 					cleanupVirtualStackTrace(t);
-				} while ((t = t.getCause()) != null);
+				}
+				while ((t = t.getCause()) != null);
 
-				if (this.uncaughtExceptionHandler == null) {
+				if(this.uncaughtExceptionHandler == null) {
 					String msg = VirtualProcessor.class.getSimpleName() + " encountered uncaught exception in " + thread.getName();
 					new Throwable(msg, uncaught).printStackTrace();
-				} else {
+				}
+				else {
 					this.uncaughtExceptionHandler.uncaughtException(thread, uncaught);
 				}
 				continue;
-			} finally {
+			}
+			finally {
 				this.current = null;
 				executedThreads++;
 			}
 
-			if (state == VirtualThreadState.SLEEPING) {
+			if(state == VirtualThreadState.SLEEPING) {
 				this.doScheduleNextTick.add(thread);
-			} else if (state == VirtualThreadState.YIELDED) {
+			}
+			else if(state == VirtualThreadState.YIELDED) {
 				this.doExecuteNextTick.addLast(thread);
 			}
 		}
@@ -171,25 +179,26 @@ public class VirtualProcessor implements Serializable {
 	}
 
 	boolean unschedule(VirtualThread thread) {
-		if (this.current == thread) {
+		if(this.current == thread) {
 			throw new IllegalStateException("virtual thread cannot unschedule itself, use stop()");
 		}
-		if (this.doExecuteNextTick.remove(thread)) {
+		if(this.doExecuteNextTick.remove(thread)) {
 			return true;
 		}
-		if (this.doScheduleNextTick.remove(thread)) {
+		if(this.doScheduleNextTick.remove(thread)) {
 			return true;
 		}
-		if (this.scheduledThreadsQueue.remove(thread)) {
+		if(this.scheduledThreadsQueue.remove(thread)) {
 			return true;
 		}
 		throw new IllegalStateException("virtual thread was not scheduled");
 	}
 
 	void schedule(VirtualThread thread) {
-		if (thread.wakeUpAt == VirtualThread.WAKEUP_IMMEDIATELY) {
+		if(thread.wakeUpAt == VirtualThread.WAKEUP_IMMEDIATELY) {
 			this.doExecuteNextTick.addLast(thread);
-		} else {
+		}
+		else {
 			this.doScheduleNextTick.add(thread);
 		}
 	}
@@ -205,9 +214,9 @@ public class VirtualProcessor implements Serializable {
 		StackTraceElement[] trace = problem.getStackTrace();
 
 		int cutoff = 0;
-		for (StackTraceElement elem : trace) {
-			if (elem.getClassName().equals(VirtualThread.class.getName())) {
-				if (elem.getMethodName().equals("run")) {
+		for(StackTraceElement elem : trace) {
+			if(elem.getClassName().equals(VirtualThread.class.getName())) {
+				if(elem.getMethodName().equals("run")) {
 					break;
 				}
 			}

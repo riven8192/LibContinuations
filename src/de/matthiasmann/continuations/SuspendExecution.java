@@ -29,39 +29,31 @@
 package de.matthiasmann.continuations;
 
 /**
- * <p>
- * An exception used to initiate the control transfer.
- * </p>
- * <p>
- * It does not support stack traces.
- * </p>
+ * <p>An exception used to initiate the control transfer.</p>
+ * <p>It does not support stack traces.</p>
  * 
- * <p>
- * Methods which are declared to throw this exception are "suspendable". This
- * exception must always be propagated and never be caught.
- * </p>
+ * <p>Methods which are declared to throw this exception are "suspendable". This
+ * exception must always be propagated and never be caught.</p>
  * 
- * <p>
- * Generic try/catch handlers are allowed:<br/>
- * {@code try doSomething(); } catch(Throwable ex) { handleException(ex); } }
- * </p>
+ * <p>Generic try/catch handlers are allowed:<br/>
+ * {@code try{ doSomething(); } catch(Throwable ex) { handleException(ex); } }</p>
  * 
- * <p>
- * The instrumentation ANT task will enhance the bytecode of these methods to
- * support suspension and continuation of their execution.
- * </p>
+ * <p>The instrumentation ANT task will enhance the bytecode of these methods to
+ * support suspension and continuation of their execution.</p>
  * 
  * @author Matthias Mann
  */
+@SuppressWarnings("serial")
 public final class SuspendExecution extends Exception {
 
-	static final SuspendExecution instance = new SuspendExecution();
+    static final SuspendExecution instance = new SuspendExecution();
+    
+    private SuspendExecution() {
+    }
 
-	private SuspendExecution() {
-	}
+    @Override
+    public Throwable fillInStackTrace() {
+        return this;
+    }
 
-	@Override
-	public Throwable fillInStackTrace() {
-		return this;
-	}
 }

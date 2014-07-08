@@ -37,12 +37,10 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 
-import craterstudio.data.CircularArrayList;
-import craterstudio.math.FastMath;
-import craterstudio.math.Vec2;
-
 import net.indiespot.continuations.*;
 import net.indiespot.continuations.test.game1.*;
+import net.indiespot.dependencies.CircularArrayList;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class Commander extends Human {
@@ -52,10 +50,10 @@ public class Commander extends Human {
 	}
 
 	public void addSoldier(Soldier soldier) {
-		if (soldier.commander != null) {
+		if(soldier.commander != null) {
 			throw new IllegalStateException();
 		}
-		if (this.soldiers.contains(soldier)) {
+		if(this.soldiers.contains(soldier)) {
 			throw new IllegalStateException();
 		}
 
@@ -64,10 +62,10 @@ public class Commander extends Human {
 	}
 
 	public void removeSoldier(Soldier soldier) {
-		if (soldier.commander != this) {
+		if(soldier.commander != this) {
 			throw new IllegalStateException();
 		}
-		if (!this.soldiers.contains(soldier)) {
+		if(!this.soldiers.contains(soldier)) {
 			throw new IllegalStateException();
 		}
 
@@ -85,7 +83,7 @@ public class Commander extends Human {
 
 		while (true) {
 			Vec2 goTo = goToQueue.pollFirst();
-			if (goTo == null) {
+			if(goTo == null) {
 				this.task = "idling";
 				VirtualThread.sleep(1000);
 				this.survive();
@@ -110,7 +108,7 @@ public class Commander extends Human {
 
 	@Override
 	public void onRemove() {
-		for (Soldier soldier : soldiers) {
+		for(Soldier soldier : soldiers) {
 			this.removeSoldier(soldier);
 		}
 
@@ -119,34 +117,34 @@ public class Commander extends Human {
 
 	private void requestLayout(Vec2 origin, float spacing, Vec2 target, boolean isForward) {
 		List<Vec2> positions = this.calcLayout(origin, spacing, target, isForward);
-		if (positions == null) {
+		if(positions == null) {
 			return;
 		}
 
-		for (int i = 0; i < soldiers.size(); i++) {
+		for(int i = 0; i < soldiers.size(); i++) {
 			soldiers.get(i).requestMoveTo(positions.get(i));
 		}
 	}
 
 	private List<Vec2> calcLayout(Vec2 origin, float spacing, Vec2 target, boolean isForward) {
 		int count = this.soldiers.size();
-		if (count == 0) {
+		if(count == 0) {
 			return null;
 		}
 
 		int w = (int) Math.ceil(Math.sqrt(count) * 0.50f);
 		int h = (int) Math.ceil(count / (float) w);
 
-		float angle = FastMath.atan2Deg(origin.y - target.y, origin.x - target.x);
-		if (!isForward) {
+		float angle = (float) Math.toDegrees(Math.atan2(origin.y - target.y, origin.x - target.x));
+		if(!isForward) {
 			angle += 180.0f;
 		}
 
-		float sin = FastMath.sinDeg(angle);
-		float cos = FastMath.cosDeg(angle);
+		float sin = (float) Math.sin(Math.toRadians(angle));
+		float cos = (float) Math.cos(Math.toRadians(angle));
 
 		List<Vec2> layout = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		for(int i = 0; i < count; i++) {
 			int x = i % w;
 			int y = i / w;
 
@@ -164,7 +162,7 @@ public class Commander extends Human {
 
 	private void waitForSoldiersArrived() throws SuspendExecution {
 		System.out.println(this + " waiting for soldiers");
-		for (Soldier soldier : soldiers) {
+		for(Soldier soldier : soldiers) {
 			while (soldier.isAlive() && !soldier.moveToRequests.isEmpty()) {
 				VirtualThread.sleep(250);
 				this.survive();

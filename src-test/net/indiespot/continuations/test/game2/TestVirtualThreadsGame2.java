@@ -34,14 +34,11 @@ package net.indiespot.continuations.test.game2;
 
 import java.awt.event.*;
 
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameCanvas;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game1.*;
-
-import craterstudio.math.Vec2;
-
+import net.indiespot.dependencies.Vec2;
 
 public class TestVirtualThreadsGame2 {
 	public static void main(String[] args) throws Exception {
@@ -49,7 +46,7 @@ public class TestVirtualThreadsGame2 {
 			@Override
 			public void run() {
 				// add trees
-				for (int i = 0; i < 1024 / 4; i++) {
+				for(int i = 0; i < 1024 / 4; i++) {
 					Tree tree = new Tree();
 					tree.position.x = Misc.random(32, 1024 - 32);
 					tree.position.y = Misc.random(32, 768 - 32);
@@ -57,7 +54,7 @@ public class TestVirtualThreadsGame2 {
 				}
 
 				// add storages
-				for (int i = 0; i < 7; i++) {
+				for(int i = 0; i < 7; i++) {
 					Storage storage = new Storage();
 					storage.position.x = Misc.random(32, 1024 - 32);
 					storage.position.y = Misc.random(32, 768 - 32);
@@ -65,7 +62,7 @@ public class TestVirtualThreadsGame2 {
 				}
 
 				// add water
-				for (int i = 0; i < 15; i++) {
+				for(int i = 0; i < 15; i++) {
 					Well water = new Well();
 					water.position.x = Misc.random(32, 1024 - 32);
 					water.position.y = Misc.random(32, 768 - 32);

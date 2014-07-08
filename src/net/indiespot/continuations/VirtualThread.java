@@ -42,10 +42,10 @@ import java.util.concurrent.atomic.*;
 
 import net.indiespot.continuations.util.VirtualMessage;
 import net.indiespot.continuations.util.VirtualMessageQueue;
-
 import de.matthiasmann.continuations.*;
 import de.matthiasmann.continuations.Coroutine.State;
 
+@SuppressWarnings("serial")
 public class VirtualThread implements CoroutineProto, VirtualRunnable {
 
 	private static final AtomicLong ID_PROVIDER = new AtomicLong();

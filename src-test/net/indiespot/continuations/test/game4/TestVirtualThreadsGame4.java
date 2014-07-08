@@ -34,14 +34,12 @@ package net.indiespot.continuations.test.game4;
 
 import java.awt.event.*;
 
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.GameCanvas;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceType;
 import net.indiespot.continuations.test.game1.*;
-
-import craterstudio.math.Vec2;
+import net.indiespot.dependencies.Vec2;
 
 public class TestVirtualThreadsGame4 {
 

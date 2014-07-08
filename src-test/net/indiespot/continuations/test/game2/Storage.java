@@ -37,15 +37,14 @@ import static net.indiespot.continuations.test.game.ResourceType.*;
 import java.awt.*;
 
 import net.indiespot.continuations.*;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceHolder;
-
 import de.matthiasmann.continuations.*;
 
 public class Storage extends GameItem {
 
+	@SuppressWarnings("serial")
 	public Storage() {
 		this.name = "storage";
 		this.color = Color.PINK;

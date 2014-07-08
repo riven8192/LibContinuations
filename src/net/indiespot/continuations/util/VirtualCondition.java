@@ -35,11 +35,10 @@ package net.indiespot.continuations.util;
 import java.io.Serializable;
 
 import net.indiespot.continuations.VirtualThread;
-
-import craterstudio.data.CircularArrayList;
-
+import net.indiespot.dependencies.CircularArrayList;
 import de.matthiasmann.continuations.*;
 
+@SuppressWarnings("serial")
 public class VirtualCondition implements Serializable {
 	private final VirtualLock attachedToLock;
 	private final CircularArrayList<VirtualThread> waiting;
@@ -56,7 +55,7 @@ public class VirtualCondition implements Serializable {
 	public void await() throws SuspendExecution {
 		VirtualThread self = VirtualThread.currentThread();
 
-		if (attachedToLock != null) {
+		if(attachedToLock != null) {
 			// release the lock before suspending
 			attachedToLock.unlock();
 		}
@@ -64,7 +63,7 @@ public class VirtualCondition implements Serializable {
 		waiting.addLast(self);
 		VirtualThread.suspend();
 
-		if (attachedToLock != null) {
+		if(attachedToLock != null) {
 			// acquire the lock before continuing
 			attachedToLock.lock();
 		}
@@ -73,7 +72,7 @@ public class VirtualCondition implements Serializable {
 	public void await(long timeout) throws SuspendExecution {
 		VirtualThread self = VirtualThread.currentThread();
 
-		if (attachedToLock != null) {
+		if(attachedToLock != null) {
 			// release the lock before suspending
 			attachedToLock.unlock();
 		}
@@ -81,7 +80,7 @@ public class VirtualCondition implements Serializable {
 		waiting.addLast(self);
 		VirtualThread.sleep(timeout); // can be woken
 
-		if (attachedToLock != null) {
+		if(attachedToLock != null) {
 			// acquire the lock before continuing
 			attachedToLock.lock();
 		}
@@ -90,14 +89,14 @@ public class VirtualCondition implements Serializable {
 	public void signal() {
 		VirtualThread self = VirtualThread.peekCurrentThread();
 
-		if (attachedToLock != null && self != null) {
-			if (attachedToLock.holder() != self) {
+		if(attachedToLock != null && self != null) {
+			if(attachedToLock.holder() != self) {
 				throw new IllegalMonitorStateException();
 			}
 		}
 
 		// resume one virtual thread
-		if (!waiting.isEmpty()) {
+		if(!waiting.isEmpty()) {
 			this.nudge(waiting.removeFirst());
 		}
 	}
@@ -105,8 +104,8 @@ public class VirtualCondition implements Serializable {
 	public void signalAll() {
 		VirtualThread self = VirtualThread.peekCurrentThread();
 
-		if (attachedToLock != null && self != null) {
-			if (attachedToLock.holder() != self) {
+		if(attachedToLock != null && self != null) {
+			if(attachedToLock.holder() != self) {
 				throw new IllegalMonitorStateException();
 			}
 		}
@@ -119,16 +118,16 @@ public class VirtualCondition implements Serializable {
 
 	private void nudge(VirtualThread thread) {
 		switch (thread.getState()) {
-			case SUSPENDED:
-				thread.resume();
-				break;
+		case SUSPENDED:
+			thread.resume();
+			break;
 
-			case SLEEPING:
-				thread.wake();
-				break;
+		case SLEEPING:
+			thread.wake();
+			break;
 
-			default:
-				throw new IllegalThreadStateException("state: " + thread.getState());
+		default:
+			throw new IllegalThreadStateException("state: " + thread.getState());
 		}
 	}
 }

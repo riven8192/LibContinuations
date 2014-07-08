@@ -38,15 +38,14 @@ import java.awt.*;
 
 import net.indiespot.continuations.VirtualRunnable;
 import net.indiespot.continuations.VirtualThread;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.GameItem;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game.ResourceHolder;
-
 import de.matthiasmann.continuations.*;
 
 public class Well extends GameItem {
 
+	@SuppressWarnings("serial")
 	public Well() {
 		this.name = "well";
 		this.color = Color.BLUE;

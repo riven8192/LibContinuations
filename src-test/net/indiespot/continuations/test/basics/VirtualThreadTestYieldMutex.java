@@ -39,6 +39,7 @@ import net.indiespot.continuations.util.VirtualCondition;
 import de.matthiasmann.continuations.*;
 
 public class VirtualThreadTestYieldMutex {
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		VirtualProcessor proc = new VirtualProcessor();
 

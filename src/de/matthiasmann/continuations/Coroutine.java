@@ -181,7 +181,7 @@ public class Coroutine implements Runnable, Serializable {
         out.defaultWriteObject();
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private boolean isInstrumented(CoroutineProto proto) {
         try {
             Class clz = Class.forName("de.matthiasmann.continuations.instrument.AlreadyInstrumented");

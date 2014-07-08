@@ -36,11 +36,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import craterstudio.math.Vec2;
-
 import net.indiespot.continuations.VirtualRunnable;
 import net.indiespot.continuations.VirtualThread;
-
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class GameItem {

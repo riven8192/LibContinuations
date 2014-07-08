@@ -1,6 +1,5 @@
 package net.indiespot.continuations.test.nio;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -8,12 +7,6 @@ import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import craterstudio.text.Text;
 
 import net.indiespot.continuations.VirtualProcessor;
 import net.indiespot.continuations.VirtualRunnable;
@@ -21,6 +14,7 @@ import net.indiespot.continuations.VirtualThread;
 import de.matthiasmann.continuations.SuspendExecution;
 
 public class VirtualThreadNIO {
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 
 		final VirtualProcessor processor = new VirtualProcessor();
@@ -37,7 +31,8 @@ public class VirtualThreadNIO {
 					System.out.println("listening: " + ssc);
 
 					handleServerSocket(ssc);
-				} catch (IOException exc) {
+				}
+				catch (IOException exc) {
 					exc.printStackTrace();
 				}
 			}
@@ -48,7 +43,7 @@ public class VirtualThreadNIO {
 		do {
 			runsLastSecond += processor.tick(now());
 
-			if (now() > lastSecond + 1000) {
+			if(now() > lastSecond + 1000) {
 				System.out.println("VirtualProcessor: " + runsLastSecond + " runs / sec");
 
 				runsLastSecond = 0;
@@ -57,12 +52,15 @@ public class VirtualThreadNIO {
 
 			try {
 				Thread.sleep(1);
-			} catch (InterruptedException exc) {
+			}
+			catch (InterruptedException exc) {
 				// ignore
 			}
-		} while (processor.hasPendingTasks());
+		}
+		while (processor.hasPendingTasks());
 	}
 
+	@SuppressWarnings("serial")
 	static void handleServerSocket(ServerSocketChannel serverSocket) throws SuspendExecution, IOException {
 
 		while (true) {
@@ -92,16 +90,16 @@ public class VirtualThreadNIO {
 
 			while (true) {
 				int got = read(socket, bb, 5000);
-				if (got == -1) {
+				if(got == -1) {
 					break;
 				}
 
 				// ends with "\r\n\r\n"
-				if (bb.position() < httpHeaderEnd.length) {
+				if(bb.position() < httpHeaderEnd.length) {
 					continue;
 				}
-				for (int i = 0; i < httpHeaderEnd.length; i++) {
-					if (bb.get(bb.position() - httpHeaderEnd.length + i) != '\r') {
+				for(int i = 0; i < httpHeaderEnd.length; i++) {
+					if(bb.get(bb.position() - httpHeaderEnd.length + i) != '\r') {
 						continue;
 					}
 				}
@@ -124,23 +122,26 @@ public class VirtualThreadNIO {
 				write(socket, bb);
 				bb.clear();
 			}
-		} catch (IOException exc) {
+		}
+		catch (IOException exc) {
 			System.err.println("i/o error: " + exc.getClass().getName() + ": " + exc.getMessage());
-		} finally {
+		}
+		finally {
 			System.out.println("diconnected: " + id);
 
 			try {
 				socket.close(); // TODO: this is blocking
-			} catch (IOException exc) {
+			}
+			catch (IOException exc) {
 				// ignore
 			}
 		}
 	}
 
 	static SocketChannel accept(ServerSocketChannel serverSocket) throws SuspendExecution, IOException {
-		for (int sleep = 0; true; sleep = incSleep(sleep)) {
+		for(int sleep = 0; true; sleep = incSleep(sleep)) {
 			SocketChannel sc = serverSocket.accept();
-			if (sc != null) {
+			if(sc != null) {
 				return sc;
 			}
 
@@ -149,40 +150,41 @@ public class VirtualThreadNIO {
 	}
 
 	static int read(SocketChannel socket, ByteBuffer bb, int timeout) throws SuspendExecution, IOException {
-		if (!bb.hasRemaining()) {
+		if(!bb.hasRemaining()) {
 			throw new IllegalStateException();
 		}
 
 		int duration = 0;
-		for (int sleep = 0; true; sleep = incSleep(sleep)) {
+		for(int sleep = 0; true; sleep = incSleep(sleep)) {
 			int got = socket.read(bb);
-			if (got != 0) {
+			if(got != 0) {
 				return got;
 			}
 
-			if (duration + sleep > timeout) {
+			if(duration + sleep > timeout) {
 				sleep = timeout - duration;
 			}
 
 			VirtualThread.sleep(sleep);
 			duration += sleep;
 
-			if (duration >= timeout) {
+			if(duration >= timeout) {
 				throw new SocketTimeoutException();
 			}
 		}
 	}
 
 	static void write(SocketChannel socket, ByteBuffer bb) throws SuspendExecution, IOException {
-		if (!bb.hasRemaining()) {
+		if(!bb.hasRemaining()) {
 			throw new IllegalStateException();
 		}
 
-		for (int sleep = 0; bb.hasRemaining(); sleep = incSleep(sleep)) {
+		for(int sleep = 0; bb.hasRemaining(); sleep = incSleep(sleep)) {
 			int got = socket.write(bb);
-			if (got == 0) {
+			if(got == 0) {
 				VirtualThread.sleep(sleep);
-			} else {
+			}
+			else {
 				sleep = 0;
 			}
 		}
@@ -190,6 +192,16 @@ public class VirtualThreadNIO {
 
 	private static int incSleep(int sleep) {
 		return Math.min(25 + (int) (sleep * 1.25f), 1000);
+	}
+
+	private static class Text {
+		public static byte[] ascii(String s) {
+			char[] c = s.toCharArray();
+			byte[] b = new byte[c.length];
+			for(int i = 0; i < c.length; i++)
+				b[i] = (byte) c[i];
+			return b;
+		}
 	}
 
 	static long now() {

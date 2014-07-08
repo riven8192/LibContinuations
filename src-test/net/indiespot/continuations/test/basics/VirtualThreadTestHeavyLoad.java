@@ -40,6 +40,7 @@ import net.indiespot.continuations.*;
 import de.matthiasmann.continuations.SuspendExecution;
 
 public class VirtualThreadTestHeavyLoad {
+	@SuppressWarnings("serial")
 	public static void main(String[] args) {
 		final VirtualProcessor processor = new VirtualProcessor(1);
 
@@ -67,6 +68,7 @@ public class VirtualThreadTestHeavyLoad {
 							}
 						}
 
+						@SuppressWarnings("unused")
 						private void doh(int sleep) throws SuspendExecution {
 							hash[0] *= 37;
 							duh(sleep);
@@ -82,9 +84,9 @@ public class VirtualThreadTestHeavyLoad {
 				//System.out.println("ok:done");
 			}
 
-			long t0 = System.nanoTime();
-			int count = processor.tick(now++);
-			long t1 = System.nanoTime();
+			//long t0 = System.nanoTime();
+			//int count = processor.tick(now++);
+			//long t1 = System.nanoTime();
 
 			//System.out.println(count + " tasks took: " + (t1 - t0) / 1_000_000L + "ms, " + (t1 - t0) / Math.max(1, count) + "nanos/switch");
 

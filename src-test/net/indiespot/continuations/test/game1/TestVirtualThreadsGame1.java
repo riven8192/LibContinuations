@@ -32,7 +32,6 @@
 
 package net.indiespot.continuations.test.game1;
 
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Game;
 import net.indiespot.continuations.test.game.Misc;
 

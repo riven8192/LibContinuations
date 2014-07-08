@@ -32,12 +32,11 @@
 
 package net.indiespot.continuations.test.game4;
 
-import craterstudio.data.CircularArrayList;
-import craterstudio.math.Vec2;
 import net.indiespot.continuations.*;
-import net.indiespot.continuations.test.*;
 import net.indiespot.continuations.test.game.Misc;
 import net.indiespot.continuations.test.game1.*;
+import net.indiespot.dependencies.CircularArrayList;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class Soldier extends Human {

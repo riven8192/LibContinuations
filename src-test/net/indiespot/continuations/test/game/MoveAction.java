@@ -32,9 +32,9 @@
 
 package net.indiespot.continuations.test.game;
 
-import craterstudio.math.EasyMath;
-import craterstudio.math.Vec2;
 import net.indiespot.continuations.VirtualThread;
+import net.indiespot.dependencies.EasyMath;
+import net.indiespot.dependencies.Vec2;
 import de.matthiasmann.continuations.*;
 
 public class MoveAction implements Action {

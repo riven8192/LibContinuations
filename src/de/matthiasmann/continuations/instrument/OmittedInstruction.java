@@ -30,33 +30,35 @@
 package de.matthiasmann.continuations.instrument;
 
 import java.util.Map;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AbstractInsnNode;
 
 /**
- *
+ * 
  * @author matthias
  */
 public class OmittedInstruction extends AbstractInsnNode {
 
-    private final AbstractInsnNode orgInsn;
+	private final AbstractInsnNode orgInsn;
 
-    public OmittedInstruction(AbstractInsnNode orgInsn) {
-        super(orgInsn.getOpcode());
-        this.orgInsn = orgInsn;
-    }
+	public OmittedInstruction(AbstractInsnNode orgInsn) {
+		super(orgInsn.getOpcode());
+		this.orgInsn = orgInsn;
+	}
 
-    @Override
-    public int getType() {
-        return orgInsn.getType();
-    }
+	@Override
+	public int getType() {
+		return orgInsn.getType();
+	}
 
-    @Override
-    public void accept(MethodVisitor cv) {
-    }
+	@Override
+	public void accept(MethodVisitor cv) {
+	}
 
-    @Override
-    public AbstractInsnNode clone(Map labels) {
-        return new OmittedInstruction(orgInsn.clone(labels));
-    }
+	@Override
+	@SuppressWarnings("rawtypes")
+	public AbstractInsnNode clone(Map labels) {
+		return new OmittedInstruction(orgInsn.clone(labels));
+	}
 }
